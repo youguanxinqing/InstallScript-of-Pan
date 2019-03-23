@@ -6,3 +6,6 @@ YouGuan网盘作为我本科的毕设项目。其主要目的是，希望做一�
 
 # 仓库说明
 InstallScript-of-Pan为YouGuan网盘提供一键部署脚本。
+
+- yun_install.sh 负责一键安装
+- uninstall.sh 负责一键卸载
