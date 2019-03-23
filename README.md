@@ -9,3 +9,13 @@ InstallScript-of-Pan为YouGuan网盘提供一键部署脚本。
 
 - yun_install.sh 负责一键安装
 - uninstall.sh 负责一键卸载
+
+# 更新日志
+
+**019.3.23**
+1. 增加 uninstall.sh 脚本，负责卸载响应环境
+2. 对 yun_install.sh 脚本中，增加 gcc 安装，增加对安装环境判断。如果所需程序已在环境中，则不再重复安装。
+
+**019.3.18**
+1. GitHub上创建仓库
+2. 添加 yun_install.sh 脚本，负责安装 libfastcommon fastdfs (安装成功后，可以通过`fdfs_test`命令查看)
