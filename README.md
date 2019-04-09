@@ -12,6 +12,13 @@ InstallScript-of-Pan为YouGuan网盘提供一键部署脚本。
 
 # 更新日志
 
+**019.4.9**
+1. 将安装 fastdfs 与 libfastcommon 从之前的**在线安装**修改为**离线安装**。即：安装包将自带所需环境（暂时不支持 gcc 的离线安装）。
+2. 对 yun_install.sh 脚本中，增加默认捕获服务器 ip 功能。也可以选择 0 退出，之后脚本会要求用户手动输入 ip 。
+3. 增加对 tracker.conf、storage.conf、client.conf 的自动化配置（仅支持单机模式），并且自动启动 tracker 与 storage 。
+4. 可用命令 `fdfs_monitor client.conf` 检查 tracker、storage 是正常运行
+![](./img/Snipaste_2019-04-09_11-35-05.png)
+
 **019.3.23**
 1. 增加 uninstall.sh 脚本，负责卸载响应环境
 2. 对 yun_install.sh 脚本中，增加 gcc 安装，增加对安装环境判断。如果所需程序已在环境中，则不再重复安装。
