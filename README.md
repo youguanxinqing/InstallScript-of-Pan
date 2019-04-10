@@ -12,6 +12,11 @@ InstallScript-of-Pan为YouGuan网盘提供一键部署脚本。
 
 # 更新日志
 
+**019.4.10**
+1. 完善 uninstall.sh 脚本，实现 fastDFS 卸载与相关文件的删除、libfastcommon 相关文件的删除
+2. 移除项目中编译后生成的 .o 文件
+3. 分离 print_formant 函数，单独存在 tools.lib 中
+
 **019.4.9**
 1. 将安装 fastdfs 与 libfastcommon 从之前的**在线安装**修改为**离线安装**。即：安装包将自带所需环境（暂时不支持 gcc 的离线安装）。
 2. 对 yun_install.sh 脚本中，增加默认捕获服务器 ip 功能。也可以选择 0 退出，之后脚本会要求用户手动输入 ip 。
@@ -20,7 +25,7 @@ InstallScript-of-Pan为YouGuan网盘提供一键部署脚本。
 ![](./img/Snipaste_2019-04-09_11-35-05.png)
 
 **019.3.23**
-1. 增加 uninstall.sh 脚本，负责卸载响应环境
+1. 增加 uninstall.sh 脚本，负责卸载相应环境
 2. 对 yun_install.sh 脚本中，增加 gcc 安装，增加对安装环境判断。如果所需程序已在环境中，则不再重复安装。
 
 **019.3.18**
