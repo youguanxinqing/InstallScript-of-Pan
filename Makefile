@@ -1,0 +1,1 @@
+# gcc -o bin/app src/*.c -Iinclude -lpthread
