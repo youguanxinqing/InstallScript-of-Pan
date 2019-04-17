@@ -12,6 +12,10 @@ InstallScript-of-Pan为YouGuan网盘提供一键部署脚本。
 
 # 更新日志
 
+**019.4.17**
+1. 调整目录结构，原有的第三方软件统一修改为 .tar.gz 压缩包形式存在安装包中，这样做可以避免它们被污染
+2. 相关内容统一安装至 /opt/YouGuan 
+
 **019.4.15**
 1. 增加 redis 的安装与卸载（db_install.sh, db_uninstall.sh）
 
