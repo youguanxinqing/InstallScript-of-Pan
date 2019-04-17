@@ -12,6 +12,12 @@ InstallScript-of-Pan为YouGuan网盘提供一键部署脚本。
 
 # 更新日志
 
+**019.4.15**
+1. 增加 redis 的安装与卸载（db_install.sh, db_uninstall.sh）
+
+**019.4.14**
+1. 增加日志功能
+
 **019.4.10**
 1. 完善 uninstall.sh 脚本，实现 fastDFS 卸载与相关文件的删除、libfastcommon 相关文件的删除
 2. 移除项目中编译后生成的 .o 文件

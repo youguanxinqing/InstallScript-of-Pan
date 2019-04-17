@@ -52,10 +52,10 @@ function is_installed
 # fastDFS 的数据文件
 function mkdir_for_tsc
 {
-    fastdfs_dir="/home/fastDFS"
-    tracker_dir="/home/fastDFS/tracker"
-    storage_dir="/home/fastDFS/storage"
-    client_dir="/home/fastDFS/client"
+    fastdfs_dir="/opt/YouGuan/fastDFS"
+    tracker_dir="/opt/YouGuan/fastDFS/tracker"
+    storage_dir="/opt/YouGuan/fastDFS/storage"
+    client_dir="/opt/YouGuan/fastDFS/client"
 
     # 不存在以上目录时才创建
     if [ ! -d "$fastdfs_dir" ]; then mkdir $fastdfs_dir; fi
@@ -155,8 +155,12 @@ then
 	# download_from_github "https://github.com/happyfish100/fastdfs.git"
 
 	# 环境中需要有gcc
+    cd ./package
+    tar xzvf "libfastcommon.tar.gz"
 	install "libfastcommon"
+    tar xzvf "fastdfs.tar.gz"
 	install "fastdfs"
+    cd -
 else
 	print_format "FastDFS was installed successfully."
 fi

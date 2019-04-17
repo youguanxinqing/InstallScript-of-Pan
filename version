@@ -1,0 +1,7 @@
+# 第三方支持软件的版本
+
+gcc version 4.8.5
+fastdfs-5.11
+libfastcommon-1.0.39
+redis-5.0.4
+hiredis-0.14

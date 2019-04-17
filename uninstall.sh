@@ -41,4 +41,4 @@ rm /usr/include/fastcommon/ -rf  # 移除 fastcommon 的头文件
 rm /usr/lib64/libfdfs* -rf  # 移除 lib64下 libfdfsclient.so
 rm /usr/lib/libfdfsclient.so /usr/lib/libfastcommon.so -rf  # 移除 lib 下库文件
 
-print_format "fastDFS、libfastcommon 卸载成功"
+print_format "Uninstall fastDFS and libfastcommon"
