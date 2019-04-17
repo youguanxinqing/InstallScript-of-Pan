@@ -6,8 +6,7 @@ function print_format
 	local symbol
 	local blank
 	strlen=$((`expr length "$1"` + 2))
-	for((i=0;i<strlen;i++))
-	do
+	for((i=0;i<strlen;i++)); do
 		symbol="$symbol-"
 		blank="$blank "
 	done

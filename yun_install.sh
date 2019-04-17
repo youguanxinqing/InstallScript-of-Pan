@@ -7,8 +7,7 @@
 function download_from_github
 {
 	git clone $1
-	if [ $? -eq 0 ]
-	then
+	if [ $? -eq 0 ]; then
 		print_format "Download libfastcommon successfully."
 	else
  		print_format "Download libfastcommon failed!!!"
@@ -21,15 +20,13 @@ function install
 	echo "Start install $1..."
 	cd $1
 	./make.sh &> /dev/null
-	if [ $? -ne 0 ]
-	then
+	if [ $? -ne 0 ]; then
 		print_format "Install $1 failed!!!"
 		exit 0
 	fi
 	
 	./make.sh install &> /dev/null
-	if [ $? -eq 0 ]
-	then
+	if [ $? -eq 0 ]; then
 		print_format "Install $1 successfully."
 	else
 		print_format "Install $1 failed!!!"
@@ -41,8 +38,7 @@ function install
 # 判断可执行程序是否已经安装
 function is_installed
 {
-	if [ -x "$(command -v $1)" ]
-	then
+	if [ -x "$(command -v $1)" ]; then
 		return 1
 	else
 		return 0
@@ -68,8 +64,7 @@ function get_host_ip
 {
     ips[0]=""
     count=1
-    for ip in $(ip addr | sed -n '/inet/p' | sed -r '/inet6/d;s/brd.*|[a-z]*|\s+//g')
-    do
+    for ip in $(ip addr | sed -n '/inet/p' | sed -r '/inet6/d;s/brd.*|[a-z]*|\s+//g'); do
         ips[$count]=${ip%/*}
         echo "$count. ${ips[$count]}"
         count=$(($count + 1))
@@ -83,8 +78,7 @@ function get_host_ip
         
         # echo $choise
         # echo $array_len
-        if [ $choise -lt  $array_len ]
-        then
+        if [ $choise -lt  $array_len ]; then
             result_ip=${ips[$choise]}
             break
         else
@@ -98,8 +92,7 @@ function get_host_ip
 function config_fastDFS
 {
     cd /etc/fdfs/
-    if [ ! -d "template" ]
-    then 
+    if [ ! -d "template" ]; then 
         mkdir template
         mv *.sample ./template &> /dev/null
     fi
@@ -109,8 +102,7 @@ function config_fastDFS
     echo yes | cp template/client.conf.sample ./client.conf &> /dev/null
 
     # 如果没能自动获取到ip, 那么需要用户手动输入
-    if [ -z "$result_ip" ]
-    then
+    if [ -z "$result_ip" ]; then
         read -p "Pls enter your host ip: " ip  # 获取本机 ip
     else
         echo $result_ip
@@ -143,14 +135,12 @@ function start_fastDFS
 
 # 主函数执行逻辑
 is_installed "gcc"  # FastDFS 的安装环境必须有gcc支持
-if [ $? -eq 0 ]
-then
+if [ $? -eq 0 ]; then
 	yum install gcc
 fi
 
 is_installed "fdfs_test"  # 安装 libfastcommon，fastdfs
-if [ $? -eq 0 ]
-then
+if [ $? -eq 0 ]; then
 	# download_from_github "https://github.com/happyfish100/libfastcommon.git"
 	# download_from_github "https://github.com/happyfish100/fastdfs.git"
 

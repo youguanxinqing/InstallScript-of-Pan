@@ -23,6 +23,13 @@ function config_redis
     cd -
 }
 
+function install_hiredis
+{
+    cd ./package; tar xzvf hiredis.tar.gz; cd ./hiredis
+    make clean; make; make install;
+    cd ../../
+}
+
 # redis 安装逻辑
 is_installed "gcc"
 if [ $? -eq 0 ]; then
@@ -39,3 +46,14 @@ echo "config redis ... "
 config_redis
 echo "start redis ... "
 redis-server /opt/YouGuan/redis/redis.conf
+
+# 安装 hiredis
+install_hiredis
+print_format "Hiredis was installed successfully."
+
+# 安装 mysql
+rpm -qa|grep mariadb|xargs rpm -e --nodeps  # 卸载自带的 mariadb-libs
+num=$(rpm -qa|grep libaio|wc -l)
+if [ $num -eq 0 ]; then
+    rpm -ivh ./package/libaio-0.3.109-13.el7.x86_64.rpm
+fi

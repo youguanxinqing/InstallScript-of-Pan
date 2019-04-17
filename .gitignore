@@ -1,1 +1,5 @@
 .vscode
+package/fastdfs/
+package/hiredis/
+package/libfastcommon/
+package/redis/
