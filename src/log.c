@@ -94,7 +94,7 @@ static int write_log(char* path, char* buf)
 
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 // 对外封装使用逻辑
-int usage(char* module_name, char* proc_name, const char* filename,
+int usage(char* kind, char* module_name, char* proc_name, const char* filename,
           int line, const char* funcname, char *fmt, ...)
 {
     char msg[4096] = {0};
@@ -110,12 +110,13 @@ int usage(char* module_name, char* proc_name, const char* filename,
     vsprintf(msg, fmt, valist);
     va_end(valist);
     // 日志格式：===2019/04/14-22:37:57, main[7]=== error: test a log
-    snprintf(buf, 4096, "===%04d/%02d/%02d-%02d:%02d:%02d, %s[%d]=== %s\n",
+    snprintf(buf, 4096, "[%s] %04d/%02d/%02d %02d:%02d:%02d %s-%s[%d]: %s\n",
+                         kind,
                          now->tm_year + 1900, 
                          now->tm_mon + 1,
                          now->tm_mday, now->tm_hour, 
                          now->tm_min, now->tm_sec,
-                         funcname, line, msg);
+                         filename, funcname, line, msg);
     create_log_path(filepath, module_name, proc_name);
     
     pthread_mutex_lock(&lock);
