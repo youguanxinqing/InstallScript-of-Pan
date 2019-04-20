@@ -19,13 +19,13 @@ function install
 {
 	echo "Start install $1..."
 	cd $1
-	./make.sh &> /dev/null
+	./make.sh
 	if [ $? -ne 0 ]; then
 		print_format "Install $1 failed!!!"
 		exit 0
 	fi
 	
-	./make.sh install &> /dev/null
+	./make.sh install
 	if [ $? -eq 0 ]; then
 		print_format "Install $1 successfully."
 	else

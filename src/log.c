@@ -109,7 +109,7 @@ int usage(char* kind, char* module_name, char* proc_name, const char* filename,
     va_start(valist, fmt);
     vsprintf(msg, fmt, valist);
     va_end(valist);
-    // 日志格式：===2019/04/14-22:37:57, main[7]=== error: test a log
+    // 日志格式：[info] 2019/04/14 22:37:57, main[7]: test a log
     snprintf(buf, 4096, "[%s] %04d/%02d/%02d %02d:%02d:%02d %s-%s[%d]: %s\n",
                          kind,
                          now->tm_year + 1900, 
@@ -125,3 +125,5 @@ int usage(char* kind, char* module_name, char* proc_name, const char* filename,
 
     return 0;
 }
+
+void not_do_anything() {}
