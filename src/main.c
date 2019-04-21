@@ -28,7 +28,7 @@ int main(int argc, char** argv)
     return 0;
 
 notice:
-    puts("argument error");
+    puts("\033[37;41;5m argument error \033[0m");
     puts("");
     my_usage();
     return -1;
