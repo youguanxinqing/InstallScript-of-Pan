@@ -1,5 +1,5 @@
 #ifndef __UPLOAD_H__
-#define __UPLOAD_H_
+#define __UPLOAD_H__
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -13,7 +13,7 @@ void not_do_anything();
 int usage(char* kind, char* module_name, char* proc_name, const char* filename,
           int line, const char* funcname, char *fmt, ...);
 
-#define NEED_DEBUG 0
+#define NEED_DEBUG 1
 #define NEED_INFO 1
 #define NEED_ERROR 1
 // #define FILE_LOG  // 日志输出 或是 标准输出 开关

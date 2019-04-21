@@ -20,7 +20,7 @@ int upload(const char* client_conf_file,
     UP_DEBUG("%s", "连接 tracker");
     p_tracker_server = tracker_get_connection();
     if (p_tracker_server == NULL) {
-        UP_ERROR("%s", "storage 链接失败");
+        UP_ERROR("%s", "tracker 链接失败");
         fdfs_client_destroy();
         return errno != 0 ? errno: ECONNABORTED;
     }
