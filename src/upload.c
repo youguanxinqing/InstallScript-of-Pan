@@ -31,13 +31,13 @@ int upload(const char* client_conf_file,
                                               group_name,
                                               &store_path_index)) !=0 )
     {
-
         UP_DEBUG("%s", "进入查询失败");
         fdfs_client_destroy();
         UP_ERROR("%s %s", "tracker_query_storage_store 失败", STRERROR(result));
         return result;
 
     }
+
     UP_DEBUG("%s", "查询结束");
     *group_name = '\0';
     UP_DEBUG("%s", "上传文件");
