@@ -16,6 +16,11 @@ InstallScript-of-Pan为YouGuan网盘提供一键部署脚本。
 1. 完成 nginx 的自动安装
 2. 完成 nginx 的部分卸载
 
+---
+
+3. 完成 nginx 自动卸载，修复 nginx 自动安装时出现的一些小 bug （现在 nginx 的自动安装完全可用了）
+![](./img/Snipaste_2019-04-29_09-39-50.png)
+
 **019.4.21**
 1. 增加文件下载功能
 2. 增加删除文件功能

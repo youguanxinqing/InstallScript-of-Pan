@@ -12,7 +12,7 @@ function install_nginx()
     cd ../package/nginx; tar xzvf nginx.tar.gz; cd nginx
     ./configure; make; make install
     ln -s /usr/local/nginx/sbin/nginx /usr/bin/nginx
-    cd ../../install
+    cd ../../../install
 }
 
 function open_port()
@@ -72,7 +72,7 @@ function install_zlib()
 is_installed "bzip2"
 if [ $? -eq 0 ]; then install_bzip2; fi
 
-is_installed "gcc"
+is_installed "g++"
 if [ $? -eq 0 ]; then install_gcc_cpp; fi
 
 install_openssl; install_pcre; install_zlib

@@ -28,22 +28,47 @@ function uninstall_bzip2()
     echo "start uninstall bzip2 ..."
     for i in $(rpm -qa |grep bzip2); do
         # 如果 'lib' 不在字符串 i 中
-        if [[ ! $i =~ "lib" ]]; then
+        if [[ ! "$i" =~ "lib" ]]; then
+            rpm -e "$i"
+        fi
+    done
+}
+
+function uninstall_gcc_cpp()
+{
+    for i in $(rpm -qa|grep c++); do
+        if [[ "$i" =~ "gcc" ]]; then 
             rpm -e $i
         fi
     done
 }
 
+function uninstall_others()
+{
+    cd ../package/nginx
+    if [ -d "pcre" ]; then cd pcre; make uninstall; cd ..; fi
+    if [ -d "zlib" ]; then cd zlib; make uninstall; cd ..; fi
+    cd ../../uninstall
+}
+
 
 # 停止 nginx 服务，删除相关配置
-# nginx -s stop; rm_nginx_related
-# if [ $? -eq 0 ];then
-#     print_format "uninstall nginx successfully."
-# fi
+if [ -x "$(command -v nginx)" ]; then nginx -s stop; fi
+rm_nginx_related
+if [ $? -eq 0 ];then echo "removed nginx !"; fi
 
-# rm_openssl_related
-# if [ $? -eq 0 ]; then
-#     echo "removed openssl !"
-# fi
+rm_openssl_related
+if [ $? -eq 0 ]; then echo "removed openssl !"; fi
+
+uninstall_gcc_cpp
+if [ $? -eq 0 ]; then echo "removed c++ !"; fi
 
 uninstall_bzip2
+if [ $? -eq 0 ]; then echo "remove bzip2 !"; fi
+
+uninstall_others
+if [ $? -eq 0 ]; then echo "removed zlib、pcre !"; fi
+
+cd ../package/nginx
+echo yes| rm -r nginx openssl zlib pcre
+print_format "uninstall nginx successfully."
