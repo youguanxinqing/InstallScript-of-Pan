@@ -28,7 +28,6 @@ function install_spawn_fcgi()
     cd ../../../install
 }
 
-
 # 主逻辑
 flag1=0; flag2=0
 install_fastcgi
@@ -50,3 +49,5 @@ fi
 if [ $flag1 -eq 1 ] && [ $flag2 -eq 1 ]; then
     print_format "install fcgi successfully."
 fi
+
+echo_note "开始生成测试程序，并做相关配置，请耐心等待..."

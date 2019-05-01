@@ -29,7 +29,7 @@ function open_port()
 
 function install_bzip2()
 {
-    echo "start install bzip2 ... "
+    echo_note "start install bzip2 ... "
     cd ../package/nginx
     rpm -ivh bzip2-devel-1.0.6-13.el7.x86_64.rpm
     rpm -ivh bzip2-1.0.6-13.el7.x86_64.rpm
@@ -38,7 +38,7 @@ function install_bzip2()
 
 function install_gcc_cpp()
 {
-    echo "start install gcc ... "
+    echo_note "start install gcc ... "
     cd ../package/nginx
     rpm -ivh gcc-c++-4.8.5-36.el7_6.1.x86_64.rpm
     cd -
@@ -46,7 +46,7 @@ function install_gcc_cpp()
 
 function install_pcre()
 {
-    echo "start install pcre ... "
+    echo_note "start install pcre ... "
     cd ../package/nginx; tar xzvf pcre.tar.gz
     cd pcre; ./configure; make; make install
     cd ../../../install
@@ -54,7 +54,7 @@ function install_pcre()
 
 function install_openssl()
 {
-    echo "start install openssl ... "
+    echo_note "start install openssl ... "
     cd ../package/nginx; tar xzvf openssl.tar.gz
     cd openssl; ./config; make
     cd ../../../install
@@ -62,7 +62,7 @@ function install_openssl()
 
 function install_zlib()
 {
-    echo "start install zlib ... "
+    echo_note "start install zlib ... "
     cd ../package/nginx; tar xzvf zlib.tar.gz
     cd zlib; ./configure; make; make install
     cd ../../../install

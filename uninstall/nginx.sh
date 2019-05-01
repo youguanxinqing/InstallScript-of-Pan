@@ -55,19 +55,19 @@ function uninstall_others()
 # 停止 nginx 服务，删除相关配置
 if [ -x "$(command -v nginx)" ]; then nginx -s stop; fi
 rm_nginx_related
-if [ $? -eq 0 ];then echo "removed nginx !"; fi
+if [ $? -eq 0 ];then echo_note "removed nginx !"; fi
 
 rm_openssl_related
-if [ $? -eq 0 ]; then echo "removed openssl !"; fi
+if [ $? -eq 0 ]; then echo_note "removed openssl !"; fi
 
 uninstall_gcc_cpp
-if [ $? -eq 0 ]; then echo "removed c++ !"; fi
+if [ $? -eq 0 ]; then echo_note "removed c++ !"; fi
 
 uninstall_bzip2
-if [ $? -eq 0 ]; then echo "remove bzip2 !"; fi
+if [ $? -eq 0 ]; then echo_note "remove bzip2 !"; fi
 
 uninstall_others
-if [ $? -eq 0 ]; then echo "removed zlib、pcre !"; fi
+if [ $? -eq 0 ]; then echo_note "removed zlib、pcre !"; fi
 
 cd ../package/nginx
 echo yes| rm -r nginx openssl zlib pcre

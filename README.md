@@ -15,6 +15,14 @@ InstallScript-of-Pan为YouGuan网盘提供一键部署脚本。
 **019.5.1**
 1. 完成 fastcgi、spawn-fcgi 的安装与卸载（`install/fcgi.sh`, `uninstal/fcgi.sh`）
 2. 增加 `echo_note`、`echo_error` 用于黄色提示、红色告警
+3. 增加测试程序 `test` ，由 spawn-fcgi 守护，并对其做 nginx 相关配置。你可以键入 `http://你的域名或者ip名字/test.html`，之后会跳转到如下画面：
+![](./img/Snipaste_2019-05-01_21-25-47.png)
+
+该页面用于检测 fastcgi 是否正常运行。如果你对 post 请求进行测试，可能会有如下回应：
+
+![](./img/Snipaste_2019-05-01_21-26-15.png)
+
+同时，在你的服务器中，键入 `ps aux|grep test`，应该能看到名为 `test` 的程序正在运行。
 
 **019.4.29**
 1. 完成 nginx 的自动安装
