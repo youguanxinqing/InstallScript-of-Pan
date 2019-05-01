@@ -9,3 +9,5 @@
 - openssl-1.0.1t
 - pcre-8.40
 - zlib-1.2.11
+- spawn-fcgi-1.6.4
+- fcgi-2.4.1

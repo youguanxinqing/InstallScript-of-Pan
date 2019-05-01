@@ -160,15 +160,3 @@ echo ""; echo "进入配置阶段..."
 get_host_ip
 config_fastDFS
 start_fastDFS
-
-
-# nginx 安装
-# cd openssl-1.0.1t -> ./config -> make  数据加密
-
-# yum -y install bzip2 -> tar xf xxx -> cd pcre-8.40
-# -> yum -y install gcc-c++ -> ./configure -> make -> make install
-
-# tar xf zlib-1.2.11.tar.gz -> cd zlib-1.2.11 -> ./configure -> make -> make install
-
-# tar xf nginx-1.10.1.tar.gz -> cd nginx-1.10.1 -> ./configure -> make -> make install
-#     - /usr/local/nginx/
