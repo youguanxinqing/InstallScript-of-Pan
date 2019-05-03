@@ -12,6 +12,9 @@ InstallScript-of-Pan为YouGuan网盘提供一键部署脚本。
 
 # 更新日志
 
+**019.5.3**
+1. 修复 nginx 设置开机自启后不能正常启动问题
+
 **019.5.1**
 1. 完成 fastcgi、spawn-fcgi 的安装与卸载（`install/fcgi.sh`, `uninstal/fcgi.sh`）
 2. 增加 `echo_note`、`echo_error` 用于黄色提示、红色告警

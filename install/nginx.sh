@@ -79,7 +79,10 @@ install_openssl; install_pcre; install_zlib
 
 is_installed "nginx"
 if [ $? -eq 0 ]; then
-    install_nginx; open_port 80; /usr/local/nginx/sbin/nginx
+    install_nginx; open_port 80
+    systemctl enable nginx  # 开机自启
+    cp ../var/conf/nginx.service /usr/lib/systemd/system/ -rf
+    systemctl daemon-reload && systemctl start nginx
 fi
 
 print_format "install nginx successfully !"

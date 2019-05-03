@@ -53,7 +53,7 @@ function uninstall_others()
 
 
 # 停止 nginx 服务，删除相关配置
-if [ -x "$(command -v nginx)" ]; then nginx -s stop; fi
+if [ -x "$(command -v nginx)" ]; then systemctl stop nginx; fi
 rm_nginx_related
 if [ $? -eq 0 ];then echo_note "removed nginx !"; fi
 

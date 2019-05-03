@@ -15,6 +15,7 @@ function find_libfcgi()
         if [ $rlt -eq 1 ]; then
             is_in_libconfig $i
             if [ $? -eq 0 ]; then append_libconfig $i; fi
+            ldconfig
             return 1
         fi
     done
@@ -25,7 +26,6 @@ function find_libfcgi()
 function append_libconfig()
 {
     sed -i "1a $1" /etc/ld.so.conf
-    ldconfig
 }
 
 # 存在返回 1； 不存在返回 0
@@ -71,10 +71,14 @@ if [ $? -eq 0 ]; then
     exit
 fi
 
-
+# testfcgi 的编译与安装
 cd ../package/fastcgi/fcgi-2.4.1-SNAP-0910052249/examples
-gcc -o test echo.c -lfcgi
-spawn-fcgi -a 127.0.0.1 -p 9001 -f ./test
+gcc -o testfcgi echo.c -lfcgi
+bin_dir="/opt/YouGuan/bin"
+if [ ! -d $bin_dir ]; then mkdir -p $bin_dir; fi
+cp ./testfcgi $bin_dir -rf
+ps -ef | grep testfcgi | grep -v grep | awk '{print "kill -9 " $2}' | sh
+spawn-fcgi -a 127.0.0.1 -p 9001 -f $bin_dir/testfcgi
 if [ $? -ne 0 ]; then
     echo_error "start program 'test' failed!"
     exit
