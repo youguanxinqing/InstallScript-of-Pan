@@ -80,19 +80,19 @@ cp ./testfcgi $bin_dir -rf
 ps -ef | grep testfcgi | grep -v grep | awk '{print "kill -9 " $2}' | sh
 spawn-fcgi -a 127.0.0.1 -p 9001 -f $bin_dir/testfcgi
 if [ $? -ne 0 ]; then
-    echo_error "start program 'test' failed!"
+    echo_error "start program 'testfcgi' failed!"
     exit
 fi
-echo_note "start program 'test' successfully."
+echo_note "start program 'testfcgi' successfully."
 cd -
 
 # nginx.conf 的设置
 append_nginxconfig '\ \ \ \ \ \ \ \ location /test.html {\n            root html;\n            index test.html;\n        }\n'
-append_nginxconfig '\ \ \ \ \ \ \ \ location /test {\n            fastcgi_pass 127.0.0.1:9001;\n            include fastcgi.conf;\n        }\n'
+append_nginxconfig '\ \ \ \ \ \ \ \ location /testfcgi {\n            fastcgi_pass 127.0.0.1:9001;\n            include fastcgi.conf;\n        }\n'
 cp ../static/html/test.html /usr/local/nginx/html/ -rf
 nginx -s reload
 if [ $? == 0 ]; then
-    print_format "config 'test' program successfully."
+    print_format "config 'testfcgi' program successfully."
 else
     print_format "sorry, any errors occurred."
 fi
