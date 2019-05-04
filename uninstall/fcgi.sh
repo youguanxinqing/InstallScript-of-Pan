@@ -26,6 +26,20 @@ function uninstall_spawn_fcgi()
     cd ../../uninstall
 }
 
+function stop_subprocess()
+{
+    local some_pro=$1
+    for i in ${some_pro[*]}; do
+        echo $i
+        ps -ef | grep $i | grep -v grep | awk '{print "kill -9 " $2}' | sh
+    done
+}
+
+
+# 停止所有 fastcgi 进程
+processes=("fastcgi" "you_upload")
+stop_subprocess "${processes[*]}"  # 传入数组的方式
+
 flag1=0; flag2=0
 uninstall_fastcgi
 if [ $? -eq 0 ]; then

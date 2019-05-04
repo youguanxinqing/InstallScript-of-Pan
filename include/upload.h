@@ -6,6 +6,7 @@
 #include <string.h>
 #include <errno.h>
 #include <sys/types.h>
+#include <sys/ipc.h>
 #include <sys/stat.h>
 #include "fdfs_client.h"
 #include "logger.h"

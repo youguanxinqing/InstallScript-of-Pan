@@ -16,7 +16,7 @@ int usage(char* kind, char* module_name, char* proc_name, const char* filename,
 #define NEED_DEBUG 1
 #define NEED_INFO 1
 #define NEED_ERROR 1
-// #define FILE_LOG  // 日志输出 或是 标准输出 开关
+#define FILE_LOG  // 日志输出 或是 标准输出 开关
 
 #ifdef FILE_LOG
 #define INFO(module_name, proc_name, x...) \

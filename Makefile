@@ -3,7 +3,11 @@
 
 all:
 	rm ./bin -rf; mkdir bin
-	gcc -o bin/app src/*.c -Iinclude -I/usr/include/fastdfs/ -I/usr/include/fastcommon/ \
-		-lpthread -lfdfsclient
+	gcc -o bin/you_upload src/*.c -Iinclude \
+							   -I/usr/include/fastdfs/ \
+							   -I/usr/include/fastcommon/ \
+							   -lpthread -lfdfsclient \
+							   -lfcgi \
+							   -std=c99 -D_SVID_SOURCE
 clean:
 	rm ./bin -r

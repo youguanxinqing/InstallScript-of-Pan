@@ -96,3 +96,32 @@ if [ $? == 0 ]; then
 else
     print_format "sorry, any errors occurred."
 fi
+
+
+# zyFile2 的相关设置
+append_nginxconfig '\ \ \ \ \ \ \ \ location /zyFile2/ {\n            root html;\n            index demo.html;\n        }\n'
+cd ../static/html; tar xzvf zyFile2.tar.gz
+rm /usr/local/nginx/html/zyFile2 -rf
+cp zyFile2 /usr/local/nginx/html -rf
+nginx -s reload
+if [ $? -eq 0 ]; then
+    print_format "config web successfully."
+else
+    print_format "sorry, any errors occurred to web"
+fi
+cd -
+
+# you_upload 配置
+append_nginxconfig '\ \ \ \ \ \ \ \ location /you_upload {\n            fastcgi_pass 127.0.0.1:9002;\n            include fastcgi.conf;\n        }\n'
+cd ..; make clean; make
+cp bin/you_upload /opt/YouGuan/bin -rf
+nginx -s reload
+cd /opt/YouGuan/bin
+ps -ef | grep you_upload | grep -v grep | awk '{print "kill -9 " $2}' | sh
+spawn-fcgi -a 127.0.0.1 -p 9002 -f ./you_upload
+if [ $? -eq 0 ]; then
+    print_format "start you_upload successfully."
+else
+    print_format "sorry, start you_upload failed."
+fi
+cd -
