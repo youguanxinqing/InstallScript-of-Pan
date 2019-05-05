@@ -86,3 +86,6 @@ if [ $? -eq 0 ]; then
 fi
 
 print_format "install nginx successfully !"
+
+sh config_nginx.sh
+sh fdfs_nginx_module.sh

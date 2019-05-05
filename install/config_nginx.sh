@@ -38,16 +38,6 @@ function is_in_libconfig()
     return 1
 }
 
-function append_nginxconfig()
-{
-    local config_path="/usr/local/nginx/conf/nginx.conf"
-    if [[ $need_cp_config == "" ]]; then
-        cp $config_path.default $config_path -f
-        need_cp_config="no need"
-    fi
-    sed -i "47a $1" $config_path
-}
-
 is_installed "nginx"
 if [ $? -eq 0 ]; then
     echo_error "stop working, pls install nginx firstly."

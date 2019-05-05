@@ -160,3 +160,6 @@ echo ""; echo "进入配置阶段..."
 get_host_ip
 config_fastDFS
 start_fastDFS
+# 设置 tracker storage 开机自启
+systemctl enable fdfs_trackerd
+systemctl enable fdfs_storaged

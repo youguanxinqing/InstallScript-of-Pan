@@ -16,6 +16,8 @@ InstallScript-of-Pan为YouGuan网盘提供一键部署脚本。
 1. 抽象 mysql 官方提供接口到 src/sqlapi.c 中
 2. 完成图片上传到 fdfs 之后，其元数据保存到 mysql 中
 ![](./img/Snipaste_2019-05-05_11-08-19.png)
+3. 完成 nginx_fastdfs_module 与 nginx 组合，以及相关配置。涉及脚本：install/fdfs_nginx_module.sh。
+4. 增加 tracker storage 开机自启
 
 **019.5.4**
 1. 程序修改为 c99 标准编译，为避免报 key_t 未定义，增加头文件`<sys/ipc.h>`

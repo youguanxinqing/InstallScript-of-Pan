@@ -48,6 +48,13 @@ function uninstall_others()
     cd ../package/nginx
     if [ -d "pcre" ]; then cd pcre; make uninstall; cd ..; fi
     if [ -d "zlib" ]; then cd zlib; make uninstall; cd ..; fi
+    # 清除解压后的目录
+    echo_note "current location: $(pwd)"
+    rm fastdfs-nginx-module -rf
+    rm pcre -rf
+    rm nginx -rf 
+    rm openssl -rf
+    rm zlib -rf
     cd ../../uninstall
 }
 

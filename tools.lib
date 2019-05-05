@@ -37,3 +37,13 @@ function echo_error()
 {
     printf "\033[1;31m$1\033[0m\n"
 }
+
+function append_nginxconfig()
+{
+    local config_path="/usr/local/nginx/conf/nginx.conf"
+    if [[ $need_cp_config == "" ]]; then
+        cp $config_path.default $config_path -f
+        need_cp_config="no need"
+    fi
+    sed -i "47a $1" $config_path
+}
