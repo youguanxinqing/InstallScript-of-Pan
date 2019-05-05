@@ -6,6 +6,8 @@ all:
 	gcc -o bin/you_upload src/*.c -Iinclude \
 							   -I/usr/include/fastdfs/ \
 							   -I/usr/include/fastcommon/ \
+							   -L/usr/lib64 \
+							   -lmysqlclient \
 							   -lpthread -lfdfsclient \
 							   -lfcgi \
 							   -std=c99 -D_SVID_SOURCE

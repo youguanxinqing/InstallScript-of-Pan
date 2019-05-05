@@ -50,10 +50,12 @@
 
 int main (int argc, char** argv) 
 {
+    you_mysql_init(DB, TABLE_DATA);  /* 初始化数据库 */
+
     while (FCGI_Accept() >= 0) {
         int len = 0;
         char *content_len = getenv("CONTENT_LENGTH");
-        // printf("Content-type: text/html\r\n\r\n");
+        printf("Content-type: text/html\r\n\r\n");
 
         if (content_len != NULL)
             len = strtol(content_len, NULL, 10);  /* str -> int */
@@ -64,7 +66,7 @@ int main (int argc, char** argv)
         } else {
             int ch;
             char filename[1024] = {0};
-            char *file_data = (char*)malloc(len);  /* 创建缓存 */
+            char *file_data = (char*)malloc(len);  /* 申请缓存块 */
             char *begin = NULL, *end = NULL, *p = NULL;
             
             begin = p = file_data;  /* 指向缓存块的首地址 */
@@ -77,25 +79,25 @@ int main (int argc, char** argv)
                     break;
                 }
                 *p = ch; 
-                p++;
+                ++p;
             }
             MA_INFO("%s", "接收完毕...");
             end = p;  /* end 指向缓存块末尾 */
             MA_INFO("%s", "解析并且保存数据");
             extract_data_and_save(begin, end, len, filename);  /* 解析数据 */
 
-            // 文件上传到fastdfs
-            // char fileid[1024] = {0};
-            // fdfs_upload_file(filename, fileid);
-            // printf("<br>fileid: %s\n<br>", fileid);
+            /* 文件上传到fastdfs */
+            MA_INFO("%s", "上传文件到 fdfs ");
+            char fileid[1024] = {0};
+            _upload(filename, fileid);
+            MA_INFO("%s: %s", "fileid", fileid);
+            printf("<br>fileid: %s\n<br>", fileid);
 
             // 将数据存储到数据库中
-            // store_data(filename, fileid);
+            save_to_mysql(filename, fileid);
 
-            // 释放内存
             free(file_data);
-            // 删除文件
-            // unlink(filename);
+            unlink(filename);  /* 删除文件 */
         }
     } /* while */
 
@@ -111,7 +113,6 @@ Content-Type: image/png\r\n
 PNG ... content of chrome.png ...
 ------WebKitFormBoundaryrGKCBY7qhFd3TrwA--\r\n
  */
-
 static int extract_data_and_save(char* begin, \
                                  char* end, \
                                  int len, \
@@ -134,7 +135,7 @@ static int extract_data_and_save(char* begin, \
     char* p_next_symbol = strchr(++p_last_symbol, '"');  /* 指向第二个双引号 */
     strncpy(filename, p_last_symbol, p_next_symbol - p_last_symbol);
     MA_INFO("filename: %s", filename);
-    // printf("<br>filename: %s<br>", filename);
+    printf("<br>filename: %s<br>", filename);
 
     /* 第三行、四行 */
     p = strstr(begin, "\r\n");
@@ -178,7 +179,22 @@ static char* get_pointer_of_border(char* content, \
             if (memcmp(cur, boundary, boder_len) == 0)
                 return cur;  /* 指针指向边界线首地址 */
         }
-        cur++;
+        ++cur;
     }
     return NULL;
+}
+
+static void save_to_mysql(char* filename, char* fileid) {
+    MYSQL* conn = you_connect(USERNAME, PASSWORD, DB);
+    if (conn == NULL) {
+        MA_ERROR("%s", "数据库连接失败, 停止保存动作");
+        return;
+    }
+
+    char sql[1024*2] = {0};
+    snprintf(sql, 1024*2, "insert into %s values(NULL, '%s', '%s')", \
+                           TABLE_DATA, filename, fileid);
+    int flag = you_execute(conn, sql);
+    if (flag == 0) MA_INFO("%s %s %s", "文件", filename, "元数据保存到数据库");
+    else MA_INFO("%s %s %s", "文件", "filename", "保存数据库失败");
 }
